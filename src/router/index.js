@@ -43,6 +43,12 @@ const routes = [
     name: "update",
     component: () => import("../views/UpdatePage.vue"),
   },
+  {
+    path: "/adminpage",
+    name: "adminpage",
+    component: () => import("../views/AdminPage.vue"),
+  },
+  
 ];
 
 const router = new VueRouter({

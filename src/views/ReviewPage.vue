@@ -1,28 +1,15 @@
 <template>
-  <v-container
-    class="d-flex justify-content-between mt-5 flex-nowrap flex-column"
-  >
-    <v-row>
-      <v-col cols="12" v-for="card in cards" :key="card.title">
-        <v-container>
-          <v-card>
-            <v-row>
-              <v-col cols="12" md="6" pa-5>
-                <v-img :src="card.src" height="300px"></v-img>
-              </v-col>
-
-              <v-col>
-                <v-card-title v-text="card.title"></v-card-title>
-
-                <v-text> สิ่งอำนวยความสะดวก </v-text>
-
-                <v-card height="150">
-                  <v-text>{{ card.detail }}</v-text>
-                </v-card>
-              </v-col>
-            </v-row>
-          </v-card>
-        </v-container>
+  <v-container class="mt-5">
+    <v-row justify="space-between">
+      <v-col cols="12" md="6" v-for="card in cards" :key="card.title">
+        <v-card class="d-flex flex-column" style="height: 100%; ">
+          <v-img :src="Image(card.locationPicture)" height="300px" width="100%" style="object-fit: cover;"></v-img>
+          <v-card-title class="text-center">{{ card.locationName}}</v-card-title>
+          <v-card-text style="height: 100px;"> {{ card.locationDescription }}</v-card-text>
+          <v-spacer></v-spacer>
+        </v-card>
+      </v-col>
+      <v-col cols="12" md="6" v-for="card in cards" :key="card.title">
       </v-col>
     </v-row>
   </v-container>
@@ -30,29 +17,36 @@
 
 <script>
 export default {
-  data: () => ({
-    cards: [
-      {
-        title: "ลานใต้อาคาร Bsc",
-        src: "https://www.sci.psu.ac.th/wp-content/uploads/2022/06/5-places-to-chill-out-3.jpg",
-        detail: "เซเว่น",
-      },
-      {
-        title: "ลานนกยูง",
-        src: "https://www.sci.psu.ac.th/wp-content/uploads/2022/06/5-places-to-chill-out.jpg",
-        detail: "ร้านน้ำชาตาปู",
-      },
-      {
-        title: "ลานชั้น1 อาคาร วท.",
-        src: "https://www.sci.psu.ac.th/wp-content/uploads/2022/06/5-places-to-chill-out-4.jpg",
-        detail: "ห้องน้ำ",
-      },
-      {
-        title: "ลานบริเวณข้างอาคาร วท.",
-        src: "https://www.sci.psu.ac.th/wp-content/uploads/2022/06/5-places-to-chill-out-5.jpg",
-        detail: "ร้านน้ำชาตาปู",
-      },
-    ],
-  }),
+
+  data() {
+    return {
+      cards: [],
+    };
+  },
+  methods: {
+    async LocationData() {
+      try {
+        const response = await this.axios.get("http://localhost:4000/location");
+        this.cards = response.data;
+        console.log(response);
+      } catch (error) {
+        console.error("Error fetching location data:", error);
+      }
+    },Image(locationPicture) {
+      return `data:image/jpeg;base64,${locationPicture}`;
+    },
+  },
+  created() {
+    this.LocationData();
+  },
 };
 </script>
+<style>
+.text-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color:#03178C;
+}
+</style>

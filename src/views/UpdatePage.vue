@@ -16,12 +16,12 @@
             <v-textarea
               placeholder="ร้านน้ำชาตาปู,ห้องน้ำ" filled>
             </v-textarea>
-            <v-btn
-                :disabled="!valid"
-                color="#AABDEE"
-                @click="gotohome">
+            <router-link to="/edit">
+            <v-btn small outlined
+                @click="gotoadmin" color="purple" class="ml-2">
                     บันทึก
             </v-btn>
+            </router-link>
           </v-col>
         </v-row>
       </v-card>
@@ -41,10 +41,8 @@
             <v-textarea
               placeholder="" filled>
             </v-textarea>
-            <v-btn
-                :disabled="!valid"
-                color="#AABDEE"
-                @click="gotohome">
+            <v-btn small outlined
+                @click="gotoadmin" color="purple" class="ml-2">
                     บันทึก
             </v-btn>
           </v-col>
@@ -66,10 +64,8 @@
             <v-textarea
               placeholder="" filled>
             </v-textarea>
-            <v-btn
-                :disabled="!valid"
-                color="#AABDEE"
-                @click="gotohome">
+            <v-btn small outlined
+                @click="gotoadmin" color="purple" class="ml-2">
                     บันทึก
             </v-btn>
           </v-col>
@@ -89,10 +85,8 @@
           <v-card-title style="font-size: 28px">ลานบริเวณข้างอาคาร วท.</v-card-title>
           <v-card-title style="font-size: 22px">สิ่งอำนวยความสะดวก</v-card-title>
           <v-textarea placeholder=" " filled> </v-textarea>
-          <v-btn
-                :disabled="!valid"
-                color="#AABDEE"
-                @click="gotohome">
+          <v-btn small outlined
+                @click="gotoadmin" color="purple" class="ml-2">
                     บันทึก
             </v-btn>
         </v-col>

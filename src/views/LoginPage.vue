@@ -4,11 +4,11 @@
       <v-container>
         <v-row justify="center">
           <v-col cols="12" sm="8" md="6">
-            <v-card class="mx-auto mt-5" style="width: 100% ">
-              <v-card-title style="font-size: 24px" justify="center">
+            <v-card class="mx-auto mt-15" style="width: 100%; height: 350px;">
+              <v-card-title style="font-size: 32px; color: #03178C;" class="text-center" >
                 เข้าสู่ระบบ
               </v-card-title>
-              <v-card-text>
+              <v-card-text class="mx-auto mt-5">
                 <v-form ref="loginForm" v-model="valid" lazy-validation>
                   <v-text-field
                     v-model="name"
@@ -27,12 +27,13 @@
                     outlined
                     type="password"
                   ></v-text-field>
-                  <v-row justify="center">
-                    <v-col cols="12">
+                  <v-row justify="center" class="mx-auto mt-2">
+                    <v-col cols="12" sm="8" md="6" class="text-center">
                       <v-btn
                         :disabled="!valid"
-                        color="#AABDEE"
-                        @click="gotohome"
+                        color="#03178C"
+                        @click="gotoadmin"
+                        style="text-align: center; color: #f2ff00;"
                       >
                         เข้าสู่ระบบ
                       </v-btn>
@@ -62,10 +63,10 @@ export default {
     passwordRules: [(v) => !!v || "กรุณากรอกรหัสผ่าน"],
   }),
   methods: {
-    gotohome() {
+    gotoadmin() {
       if (this.$refs.loginForm.validate(true)) {
         localStorage.setItem("username", this.name);
-        this.$router.push("/homePage");
+        this.$router.push("/AdminPage");
       }
     },
     Register() {
@@ -75,4 +76,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.text-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>

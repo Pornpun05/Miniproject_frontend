@@ -1,20 +1,20 @@
 <template>
   <v-app>
     <v-main>
-      <v-container>
+      <v-container class="d-flex justify-content-between mt-5 flex-wrap">
         <v-row justify="center">
-          <v-col cols="20" sm="10" md="8">
-            <v-card class="mx-auto mt-10" style="width: 100%" @click="gotohome">
+          <v-col cols="20" sm="10" md="8" >
+            <v-card class="custom-card" @click="gotohome">
               <v-img
                 src="https://readthecloud.co/wp-content/uploads/2022/01/the-importance-of-bookstores-4-750x563.jpg"
                 height="250px">
               </v-img>
               <div class="d-flex justify-content-between mt-10 flex-wrap"></div>
               <v-card-text >
-                <p style="font-size: 34px; text-align: center">ยินดีต้อนรับ</p>
+                <p style="font-size: 34px; text-align: center; color: #2004ab;">ยินดีต้อนรับ</p>
               </v-card-text>
               <v-card-text>
-                <p style="font-size: 20px; text-align: center">ระบบแนะนำสถานที่อ่านหนังสือภายในมหาวิทยาลัยสงขลานครินทร์</p>
+                <p style="font-size: 20px; text-align: center ; color: #2004ab;">ระบบแนะนำสถานที่อ่านหนังสือภายในมหาวิทยาลัยสงขลานครินทร์</p>
               </v-card-text>
             </v-card>
           </v-col>
@@ -42,4 +42,10 @@ export default {
   },
 };
 </script>
-<style></style>
+<style>
+.custom-card {
+  width: 100%; 
+  height: 450px; 
+}
+</style>
+
