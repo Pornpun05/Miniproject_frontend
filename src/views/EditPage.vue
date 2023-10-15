@@ -56,20 +56,29 @@ export default {
         console.error("Error fetching location data:", error);
       }
     },
+    async deleteItem(card) {
+      try {
+        const response = await this.axios.delete(
+          `http://localhost:4000/location/${card.locationId}`
+        );
+        this.LocationData();
+        console.log(response);
+      } catch (error) {
+        console.error("Error deleting location:", error);
+      }
+    },
     Image(locationPicture) {
       return `data:image/jpeg;base64,${locationPicture}`;
     },
     openDialog(action, item) {
       console.log("Edit action for item: ", item);
     },
-    
   },
   created() {
     this.LocationData();
   },
 };
 </script>
-
 <style>
 .text-center {
   display: flex;
