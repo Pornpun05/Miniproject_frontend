@@ -4,7 +4,11 @@
       <v-row>
         <v-col cols="12" md="6">
           <v-img
-            :src="imageFile !== null ?  getPhoto(imageFile) : Image(cards.locationPicture)"
+            :src="
+              imageFile !== null
+                ? getPhoto(imageFile)
+                : Image(cards.locationPicture)
+            "
             height="300px"
             width="100%"
             style="object-fit: cover"
@@ -12,9 +16,16 @@
           <input type="file" @change="handleFileUpload" />
         </v-col>
         <v-col cols="12" md="6">
-          <v-card-title >{{
-            cards.locationName
-          }}</v-card-title>
+          <v-card-title
+            style="
+              text-align: center;
+              justify-content: center;
+              align-items: center;
+              font-size: 24px;
+              color: #03178c;
+            "
+            >{{ cards.locationName }}</v-card-title
+          >
           <v-textarea
             v-model="cards.locationDescription"
             style="height: 100px; font-size: 16px"
@@ -59,24 +70,41 @@ export default {
   created() {
     this.LocationData();
   },
-//   watch: {
-//     imageFile: function(photo){
-//         this.getPhoto()
-//     }
-//   },
+  //   watch: {
+  //     imageFile: function(photo){
+  //         this.getPhoto()
+  //     }
+  //   },
 
   methods: {
     handleFileUpload(event) {
       this.imageFile = event.target.files[0];
     },
-    getPhoto(imageFile){
-        return URL.createObjectURL(imageFile)
+    getPhoto(imageFile) {
+      return URL.createObjectURL(imageFile);
     },
     async updateData() {
       try {
         const formData = new FormData();
         formData.append("body", JSON.stringify(this.cards)); // Convert cards to JSON string
-        formData.append("photo", this.imageFile); // Append the image file
+        // formData.append("photo", this.imageFile); // Append the image file
+        if (this.imageFile) {
+          formData.append("photo", this.imageFile);
+        } else if (this.cards.locationPicture) {
+          const base64Data = `data:image/jpeg;base64,${this.cards.locationPicture}`;
+          const byteCharacters = atob(base64Data.split(",")[1]);
+          const byteArrays = new Uint8Array(byteCharacters.length);
+
+          for (let i = 0; i < byteCharacters.length; i++) {
+            byteArrays[i] = byteCharacters.charCodeAt(i);
+          }
+          const blob = new Blob([byteArrays], { type: "image/jpeg" });
+
+          const fileName = "photo";
+          const file = new File([blob], fileName, { type: "image/jpeg" });
+
+          formData.append("photo", file);
+        }
 
         const response = await this.axios.put(
           `http://localhost:4000/location/${this.$route.params.locationId}`,
@@ -87,11 +115,10 @@ export default {
             },
           }
         );
-        if(response.status === 200){
-            location.href = "/editpage";
+        if (response.status === 200) {
+          location.href = "/editpage";
         }
 
-        
         console.log(response.data);
       } catch (error) {
         console.error("Error updating location:", error);
@@ -117,7 +144,7 @@ export default {
       console.log("Edit action for item: ", item);
     },
     gotoBack() {
-      this.$router.go(-1)
+      this.$router.go(-1);
     },
   },
   created() {

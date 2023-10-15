@@ -1,12 +1,21 @@
 <template>
   <div class="d-flex justify-content-between mt-5 flex-nowrap flex-column">
+    <v-btn depressed class="ml-auto"  @click="goAdd"  color="warning" x-large style="text-align: center; color: #ffffff; margin-right: 100px;">
+    เพิ่ม
+   </v-btn>
     <v-card v-for="card in cards" :key="card._id" class="mx-auto col-md-10 mt-5 align-items-start">
       <v-row>
         <v-col cols="12" md="6">
           <v-img :src="Image(card.locationPicture)" height="300px" width="100%" style="object-fit: cover;"></v-img>
         </v-col>
         <v-col cols="12" md="6">
-          <v-card-title class="text-center">{{ card.locationName }}</v-card-title>
+          <v-card-title style="
+              text-align: center;
+              justify-content: center;
+              align-items: center;
+              font-size: 24px;
+              color: #03178c;
+            ">{{ card.locationName }}</v-card-title>
           <v-card-title style="height: 100px; font-size: 16px;">{{ card.locationDescription }}</v-card-title>
           <v-spacer></v-spacer>
           <div class="text-center">
@@ -56,6 +65,9 @@ export default {
         console.error("Error fetching location data:", error);
       }
     },
+    goAdd () {
+      this.$router.push("/update");
+    },
     async deleteItem(card) {
       try {
         const response = await this.axios.delete(
@@ -73,10 +85,12 @@ export default {
     openDialog(action, item) {
       console.log("Edit action for item: ", item);
     },
+    
   },
   created() {
     this.LocationData();
   },
+  
 };
 </script>
 <style>
@@ -86,6 +100,6 @@ export default {
   align-items: center;
   font-size: 24px;
   color: #03178C;
-  margin-top: 8%;
+  margin-top: 15%;
 }
 </style>
