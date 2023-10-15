@@ -3,9 +3,9 @@
     <v-main>
       <v-container>
         <v-row justify="center">
-          <v-col cols="12" sm="8" md="6">
+          <v-col cols="12" sm="8" md="6" >
             <v-card class="mx-auto mt-5" style="width: 100%">
-              <v-card-title style="font-size: 24px" justify="center">
+              <v-card-title style="font-size: 32px; color: #03178C;" class="text-center"  >
                 สมัครสมาชิก
               </v-card-title>
               <v-card-text>
@@ -38,8 +38,13 @@
                   ></v-text-field>
 
                   <v-row justify="center">
-                    <v-col cols="12">
-                      <v-btn :disabled="!valid" color="#AABDEE" @click="Login">
+                    <v-col cols="12" class="text-center">
+                      <v-btn
+                        :disabled="!valid"
+                        color="#03178C"
+                        @click="gotologin"
+                        style="text-align: center; color: #f2ff00;"
+                      >
                         เข้าสู่ระบบ
                       </v-btn>
                     </v-col>
@@ -83,11 +88,17 @@ export default {
       }
     },
 
-    Home() {
-      this.$router.push("/home");
+    gotologin() {
+      this.$router.push("/login");
     },
   },
 };
 </script>
 
-<style></style>
+<style>
+.text-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>

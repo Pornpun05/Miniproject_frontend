@@ -11,22 +11,23 @@
               <v-card-text class="mx-auto mt-5">
                 <v-form ref="loginForm" v-model="valid" lazy-validation>
                   <v-text-field
-                    v-model="name"
-                    :counter="20"
-                    :rules="nameRules"
-                    label="ชื่อผู้ใช้งาน"
-                    required
-                    outlined
-                  ></v-text-field>
+                v-model="username"
+                :rules="nameRules"
+                label="username"
+                placeholder="username"
+                required
+                outlined
+              ></v-text-field>
 
-                  <v-text-field
-                    v-model="password"
-                    :rules="passwordRules"
-                    label="รหัสผ่าน"
-                    required
-                    outlined
-                    type="password"
-                  ></v-text-field>
+              <v-text-field
+                v-model="password"
+                :rules="passwordRules"
+                label="password"
+                placeholder="password"
+                type="password"
+                required
+                outlined
+              ></v-text-field>
                   <v-row justify="center" class="mx-auto mt-2">
                     <v-col cols="12" sm="8" md="6" class="text-center">
                       <v-btn
@@ -53,7 +54,7 @@
 export default {
   data: () => ({
     valid: true,
-    name: "",
+    username: "",
     nameRules: [
       (v) => !!v || "กรุณากรอกชื่อผู้ใช้",
       (v) =>
@@ -63,10 +64,30 @@ export default {
     passwordRules: [(v) => !!v || "กรุณากรอกรหัสผ่าน"],
   }),
   methods: {
-    gotoadmin() {
+    async gotoadmin() {
       if (this.$refs.loginForm.validate(true)) {
-        localStorage.setItem("username", this.name);
-        this.$router.push("/AdminPage");
+        const Data = {
+          adminUsername: this.username,
+          adminPassword: this.password,
+        };
+
+        try {
+          const response = await this.axios.post(
+            "http://localhost:4000/admin/login",
+            Data
+          );
+          if (response.status === 200) {
+              this.$router.push("/AdminPage");
+            // window.location.reload();
+          } else if (response.status === 401) {
+            console.error("Failed login information.");
+          } else {
+            console.error("Internal server error.");
+          }
+        } catch (error) {
+          alert("Incorrect password. Please try again.");
+          console.error(error);
+        }
       }
     },
     Register() {

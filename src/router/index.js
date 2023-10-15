@@ -34,8 +34,8 @@ const routes = [
     component: () => import("../views/ReviewPage.vue"),
   },
   {
-    path: "/edit",
-    name: "edit",
+    path: "/editpage",
+    name: "editpage",
     component: () => import("../views/EditPage.vue"),
   },
   {
@@ -47,6 +47,11 @@ const routes = [
     path: "/adminpage",
     name: "adminpage",
     component: () => import("../views/AdminPage.vue"),
+  },
+  {
+    path: "/edit/:locationId",
+    name: "edit",
+    component: () => import("../views/Edit.vue"),
   },
   
 ];

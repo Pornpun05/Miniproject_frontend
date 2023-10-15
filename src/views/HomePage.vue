@@ -8,7 +8,7 @@
           @click="gotoreview"
         >
         <v-img :src="Image(card.facultyPicture)" height="200px"></v-img>
-        <v-card-title class="text-center d-flex justify-center align-center" style="height: 3rem">{{ card.facultyName }}</v-card-title>
+        <v-card-title class="text-center d-flex justify-center align-center " style="height: 3rem">{{ card.facultyName }}</v-card-title>
         </v-card>
       </v-col>
     </v-row>
@@ -34,9 +34,13 @@ export default {
     },Image(facultyPicture) {
       return `data:image/jpeg;base64,${facultyPicture}`;
     },
+    gotoreview() {
+      this.$router.push("/review");
+    },
   },
   created() {
     this.FacultyData();
   },
+
 };
 </script>

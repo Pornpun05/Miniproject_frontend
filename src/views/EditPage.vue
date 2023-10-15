@@ -1,160 +1,38 @@
 <template>
   <div class="d-flex justify-content-between mt-5 flex-nowrap flex-column">
-    <v-card class="mx-auto col-md-10 mt-5 align-items-start">
+    <v-card v-for="card in cards" :key="card._id" class="mx-auto col-md-10 mt-5 align-items-start">
       <v-row>
         <v-col cols="12" md="6">
-          <v-img
-            src="https://www.sci.psu.ac.th/wp-content/uploads/2022/06/5-places-to-chill-out-3.jpg"
-            height="350px"
-          >
-          </v-img>
+          <v-img :src="Image(card.locationPicture)" height="300px" width="100%" style="object-fit: cover;"></v-img>
         </v-col>
         <v-col cols="12" md="6">
-          <v-card-title style="font-size: 28px">ลานใต้อาคาร BSc</v-card-title>
-          <v-card-title style="font-size: 22px"
-            >สิ่งอำนวยความสะดวก</v-card-title
-          >
-          <v-textarea placeholder="ร้านน้ำชาตาปู,ห้องน้ำ" filled> </v-textarea>
-          <router-link to="/update">
+          <v-card-title class="text-center">{{ card.locationName }}</v-card-title>
+          <v-card-title style="height: 100px; font-size: 16px;">{{ card.locationDescription }}</v-card-title>
+          <v-spacer></v-spacer>
+          <div class="text-center">
+            <router-link :to="'/edit/' + card.locationId">
+              <v-btn
+                depressed
+                class="mr-2"
+                @click="openDialog('edit', card)"
+                color="green"
+                style="text-align: center; color: #ffffff;"
+              >
+              แก้ไข
+                <!-- <v-icon>mdi-pencil</v-icon> -->
+              </v-btn>
+            </router-link>
             <v-btn
-              small
-              outlined
-              class="mr-2"
-              @click="openDialog('edit', item)"
-              color="green"
+              depressed
+              @click="deleteItem(card)"
+              color="red"
+              class="ml-2"
+              style="text-align: center; color: #ffffff;"
             >
-              <v-icon> mdi-pencil </v-icon>
+             ลบ
+              <!-- <v-icon>mdi-delete</v-icon> -->
             </v-btn>
-          </router-link>
-          <v-btn
-            small
-            outlined
-            @click="deleteItem(item)"
-            color="red"
-            class="ml-2"
-          >
-            <v-icon> mdi-delete </v-icon>
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-card>
-
-    <v-card class="mx-auto col-md-10 mt-5 align-items-start">
-      <v-row>
-        <v-col cols="14" md="6">
-          <v-img
-            src="https://www.sci.psu.ac.th/wp-content/uploads/2022/06/5-places-to-chill-out.jpg"
-            height="350px"
-          >
-          </v-img>
-        </v-col>
-        <v-col cols="14" md="6">
-          <v-card-title style="font-size: 28px">ลานนกยูง</v-card-title>
-          <v-card-title style="font-size: 22px"
-            >สิ่งอำนวยความสะดวก</v-card-title
-          >
-          <v-textarea placeholder="" filled> </v-textarea>
-          <router-link to="/update">
-          <v-btn
-            small
-            outlined
-            class="mr-2"
-            @click="openDialog('edit', item)"
-            color="green"
-          >
-            <v-icon> mdi-pencil </v-icon>
-          </v-btn>
-        </router-link>
-          <v-btn
-            small
-            outlined
-            @click="deleteItem(item)"
-            color="red"
-            class="ml-2"
-          >
-            <v-icon> mdi-delete </v-icon>
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-card>
-
-    <v-card class="mx-auto col-md-10 mt-5 align-items-start">
-      <v-row>
-        <v-col cols="14" md="6">
-          <v-img
-            src="https://www.sci.psu.ac.th/wp-content/uploads/2022/06/5-places-to-chill-out-4.jpg"
-            height="350px"
-          >
-          </v-img>
-        </v-col>
-        <v-col cols="14" md="6">
-          <v-card-title style="font-size: 28px">ลานชั้น1 อาคารวท.</v-card-title>
-          <v-card-title style="font-size: 22px"
-            >สิ่งอำนวยความสะดวก</v-card-title
-          >
-          <v-textarea placeholder="ห้องน้ำ" filled> </v-textarea>
-          <router-link to="/update">
-          <v-btn
-            small
-            outlined
-            class="mr-2"
-            @click="openDialog('edit', item)"
-            color="green"
-          >
-            <v-icon> mdi-pencil </v-icon>
-          </v-btn>
-        </router-link>
-          <v-btn
-            small
-            outlined
-  
-            @click="deleteItem(item)"
-            color="red"
-            class="ml-2"
-          >
-            <v-icon> mdi-delete </v-icon>
-          </v-btn>
-        </v-col>
-      </v-row>
-    </v-card>
-
-    <v-card class="mx-auto col-md-10 mt-5 align-items-start">
-      <v-row>
-        <v-col cols="14" md="6">
-          <v-img
-            src="https://www.sci.psu.ac.th/wp-content/uploads/2022/06/5-places-to-chill-out-5.jpg"
-            height="350px"
-          >
-          </v-img>
-        </v-col>
-        <v-col cols="14" md="6">
-          <v-card-title style="font-size: 28px"
-            >ลานบริเวณข้างอาคาร วท.</v-card-title
-          >
-          <v-card-title style="font-size: 22px"
-            >สิ่งอำนวยความสะดวก</v-card-title
-          >
-          <v-textarea placeholder=" " filled> </v-textarea>
-          <router-link to="/update">
-          <v-btn
-            small
-            outlined
-            class="mr-2"
-            @click="openDialog('edit', item)"
-            color="green"
-          >
-            <v-icon> mdi-pencil </v-icon>
-          </v-btn>
-        </router-link>
-          <v-btn
-            small
-            outlined
-            @click="deleteItem(item)"
-            color="red"
-            class="ml-2"
-          >
-            <v-icon> mdi-delete </v-icon>
-          </v-btn>
+          </div>
         </v-col>
       </v-row>
     </v-card>
@@ -163,15 +41,42 @@
 
 <script>
 export default {
-  data: () => ({
-    show1: false,
-    show2: false,
-    show3: false,
-  }),
+  data() {
+    return {
+      cards: [],
+    };
+  },
   methods: {
-    gotoadmin() {
-      this.$router.push("/AdminPage");
+    async LocationData() {
+      try {
+        const response = await this.axios.get("http://localhost:4000/location");
+        this.cards = response.data;
+        console.log(response);
+      } catch (error) {
+        console.error("Error fetching location data:", error);
+      }
     },
+    Image(locationPicture) {
+      return `data:image/jpeg;base64,${locationPicture}`;
+    },
+    openDialog(action, item) {
+      console.log("Edit action for item: ", item);
+    },
+    
+  },
+  created() {
+    this.LocationData();
   },
 };
 </script>
+
+<style>
+.text-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: #03178C;
+  margin-top: 8%;
+}
+</style>

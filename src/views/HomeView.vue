@@ -9,13 +9,15 @@
                 src="https://readthecloud.co/wp-content/uploads/2022/01/the-importance-of-bookstores-4-750x563.jpg"
                 height="250px">
               </v-img>
-              <div class="d-flex justify-content-between mt-10 flex-wrap"></div>
+              <div class="d-flex justify-content-between mt-8 flex-wrap"></div>
               <v-card-text >
-                <p style="font-size: 34px; text-align: center; color: #2004ab;">ยินดีต้อนรับ</p>
+                <div style="font-size: 34px; text-align: center; color: #2004ab;">ยินดีต้อนรับ</div>
               </v-card-text>
               <v-card-text>
-                <p style="font-size: 20px; text-align: center ; color: #2004ab;">ระบบแนะนำสถานที่อ่านหนังสือภายในมหาวิทยาลัยสงขลานครินทร์</p>
+                <div style="font-size: 20px; text-align: center ; color: #2004ab;">ระบบแนะนำสถานที่อ่านหนังสือภายในมหาวิทยาลัยสงขลานครินทร์</div>
               </v-card-text>
+              <div class="d-flex justify-content-between mt-2 flex-wrap"></div>
+              <div style="font-size: 16px; text-align: center ; color: #2004ab;">คลิกเพื่อดู</div>
             </v-card>
           </v-col>
         </v-row>
@@ -23,7 +25,6 @@
     </v-main>
   </v-app>
 </template>
-
 <script>
 export default {
   data: () => ({

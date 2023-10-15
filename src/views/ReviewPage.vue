@@ -5,7 +5,7 @@
         <v-card class="d-flex flex-column" style="height: 100%; ">
           <v-img :src="Image(card.locationPicture)" height="300px" width="100%" style="object-fit: cover;"></v-img>
           <v-card-title class="text-center">{{ card.locationName}}</v-card-title>
-          <v-card-text style="height: 100px;"> {{ card.locationDescription }}</v-card-text>
+          <v-card-text style="height: 100px; font-size: 16px;"> {{ card.locationDescription }}</v-card-text>
           <v-spacer></v-spacer>
         </v-card>
       </v-col>
